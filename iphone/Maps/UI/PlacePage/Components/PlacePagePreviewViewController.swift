@@ -76,9 +76,9 @@ final class PlacePagePreviewViewController: UIViewController {
 //                                                 attributes: [.foregroundColor : UIColor.linkBlue(),
 //                                                              .font : UIFont.regular14()]))
 //      }
-      
+
       // Define emoji font with fallback
-      let emojiFont = UIFont(name: "OrganicMapsEmojiFont", size: 14)!
+      let emojiFont = UIFont(name: "OrganicMapsEmoji", size: 14)!
       let fallbackFont = UIFont.regular14()
       let cascadeDescriptor = emojiFont.fontDescriptor.addingAttributes([UIFontDescriptor.AttributeName.cascadeList: [fallbackFont.fontDescriptor]])
       let emojiFontWithFallback = UIFont(descriptor: cascadeDescriptor, size: 14)
@@ -87,7 +87,7 @@ final class PlacePagePreviewViewController: UIViewController {
         subtitleString.append(NSAttributedString(string: !subtitleString.string.isEmpty ? " • " + subtitle : subtitle,
                                                  attributes: [.foregroundColor : UIColor.blackSecondaryText(),
                                                               .font : emojiFontWithFallback]))
-        
+
         subtitleLabel.attributedText = subtitleString
         subtitleContainerView.isHidden = false
       } else {
@@ -167,7 +167,7 @@ final class PlacePagePreviewViewController: UIViewController {
       setScheduleLabel(state: L("twentyfour_seven"),
                        stateColor: UIColor.systemGreen,
                        details: nil)
-      
+
     case .open:
       let nextTimeClosed = placePagePreviewData.schedule.nextTimeClosed
       let minutesUntilClosed = (nextTimeClosed - now) / 60
@@ -187,15 +187,15 @@ final class PlacePagePreviewViewController: UIViewController {
       {
         details = nil
       }
-      
+
       setScheduleLabel(state: L("editor_time_open"),
                        stateColor: UIColor.systemGreen,
                        details: details)
-      
+
     case .closed:
       let nextTimeOpen = placePagePreviewData.schedule.nextTimeOpen
       let nextTimeOpenDate = Date(timeIntervalSince1970: TimeInterval(nextTimeOpen))
-      
+
       let minutesUntilOpen = (nextTimeOpen - now) / 60
       let stringTimeInterval = getTimeIntervalString(minutes: minutesUntilOpen)
       let stringTime = stringFromTime(nextTimeOpen)
@@ -222,16 +222,16 @@ final class PlacePagePreviewViewController: UIViewController {
       {
         details = nil
       }
-      
+
       setScheduleLabel(state: L("closed_now"),
                        stateColor: UIColor.systemRed,
                        details: details)
-      
+
     @unknown default:
       fatalError()
     }
   }
-  
+
   private func getTimeIntervalString(minutes: Int) -> String {
     var str = ""
     if (minutes >= 60)
@@ -241,7 +241,7 @@ final class PlacePagePreviewViewController: UIViewController {
     str += String(minutes % 60) + " " + L("minute")
     return str
   }
-  
+
   private func setScheduleLabel(state: String, stateColor: UIColor, details: String?) {
     let attributedString = NSMutableAttributedString()
     let stateString = NSAttributedString(string: state,
